@@ -23,6 +23,7 @@
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+
             "assets": [
               {
                 "glob": "**/*",
@@ -64,7 +65,8 @@
               "buildTarget": "CL:build:production"
             },
             "development": {
-              "buildTarget": "CL:build:development"
+              "buildTarget": "CL:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
