@@ -4,7 +4,7 @@
       <button (click)="callApi()" class="btn btn-primary w-100">Chiama L'api</button>
     </div>
     <div class="col-7">
-      {{resultapi | json }}
+      {{resultapi() | json }}
     </div>
   </div>
 </main>
