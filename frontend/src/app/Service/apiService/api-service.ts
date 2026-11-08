@@ -12,7 +12,7 @@ export class ApiService {
   }
 
   getApiPython(){
-    return this.http.get(this.URL_ARCHIVE.getApiPython)
+    return this.http.get<getapiStandard[]>(this.URL_ARCHIVE.getApiPython)
   }
 
 }

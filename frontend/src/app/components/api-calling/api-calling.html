@@ -1,10 +1,16 @@
-<main class="d-flex ">
-  <div class="row w">
-    <div class="p-2">
+<main class="d-flex w-100  align-content-center">
+  <div class="row">
+    <div class="col-auto">
       <button (click)="callApi()" class="btn btn-primary w-100">Chiama L'api</button>
     </div>
-    <div class="col-7">
-      {{resultapi() | json }}
+    <div class="col-auto">
+      @for (item of (resultapi()); track $index) {
+          <pre class="m-2 border-1 border-black">
+            {{item | json}}
+          </pre>
+      }
+
+
     </div>
   </div>
 </main>

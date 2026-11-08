@@ -12,7 +12,7 @@ export class ApiCalling {
 
   callapiSrv = inject(ApiService)
 
-  resultapi = signal({})
+  resultapi = signal([] as getapiStandard[])
 
   callApi(){+
     this.callapiSrv.getApiPython().subscribe((res) =>{
