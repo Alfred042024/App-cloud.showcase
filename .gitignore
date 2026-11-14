@@ -1,1 +1,1 @@
-backend/src/backend/__pycache__/**
+backend/src/backend/__pycache__/*.pyc

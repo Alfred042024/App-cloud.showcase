@@ -8,10 +8,19 @@ authors = [
 requires-python = ">=3.13"
 dependencies = [
     "fastapi[standard]>=0.162.2",
+    "psycopg[binary]>=3.3.9",
+    "psycopg-pool[binary]>=3.3.3",
+    "python-dotenv",
+    "pydantic>=2.14.3",
 ]
 
 [project.scripts]
 backend = "backend:main"
+
+
+[tool.fastapi]
+entrypoint = "backend.main:app"
+
 
 [build-system]
 requires = ["uv_build>=0.13.4,<0.14.0"]
