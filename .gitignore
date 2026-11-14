@@ -1,1 +1,5 @@
-backend/src/backend/__pycache__/*.pyc
+backend/src/backend/**/*.pyc
+backend/src/backend/**/**.pyc
+backend/src/backend/**/**/**.pyc
+backend/src/models/**/**.pyc
+backend/src/models/**/**.pyc
