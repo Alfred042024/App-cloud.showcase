@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from fastapi.responses import HTMLResponse
 from backend.service.url_crud import *
 
-from models.urls_models import ADD_URLS_TYPE
+from backend.models.urls_models import ADD_URLS_TYPE
 
 router_urls = APIRouter()
 
@@ -23,6 +23,6 @@ def controller_get_url_by_id(id):
     return get_url_by_id(id)
 
 @router_urls.post("/api/addnewurl")
-def add_new_url_controller(body:ADD_URLS_TYPE) -> bool : 
+def add_new_url_controller(body:ADD_URLS_TYPE)  : 
     return add_new_url(body)
     

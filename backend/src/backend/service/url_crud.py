@@ -1,7 +1,8 @@
 from backend.shared.db_conn import DB_POOL
-from models.urls_models import ADD_URLS_TYPE
+from backend.models.urls_models import ADD_URLS_TYPE
 from psycopg.rows import dict_row
-from psycopg import Cursor
+from psycopg.errors import Error , UniqueViolation
+from fastapi.exceptions import HTTPException
 
 def get_url_by_id(id: int ): 
     with DB_POOL.connection() as connection: 
@@ -9,10 +10,13 @@ def get_url_by_id(id: int ):
 
        res = connection.execute(
          "select * from urls where id = %s ", 
-          id 
+          params = [id] 
          ).fetchone()
-       
-    return res
+
+       if res is not None: 
+          return res
+       else: 
+          raise HTTPException(404 , "no data found with this id")
 
 def get_url(): 
     with DB_POOL.connection() as connection: 
@@ -21,14 +25,25 @@ def get_url():
       res = connection.execute(
          "select * from urls"
      ).fetchall()
-      
-    return res
 
+    if res is not None : 
+        return res
+    else: 
+        return []
+      
 def add_new_url(body:ADD_URLS_TYPE): 
-   with DB_POOL.connection() as conn: 
-      insert_result = conn.execute(
-         "insert into urls (short_url,original_url) values (%s , %s)", 
-         params= [body.short_url, body.original_url]
-        ).results()
-    
+   try: 
+        with DB_POOL.connection() as conn: 
+            conn.row_factory = dict_row
+            insert_result = conn.execute(
+                "insert into urls (short_url,original_url) values (%s , %s) returning id as new_insert ", 
+                params= (body.short_url, body.original_url)
+                ).fetchone()
+            return insert_result
+        
+   except UniqueViolation as err: 
+        raise HTTPException(500, detail = [ "record già presente", "F0002"])
+   except Error as err: 
+       raise HTTPException(500, detail = ["Errore durante l'update", "F0001"])
+       
 
