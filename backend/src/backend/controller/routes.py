@@ -22,7 +22,7 @@ def apiServiceSimpleGET():
 def controller_get_url_by_id(id): 
     return get_url_by_id(id)
 
-@router_urls.post("/api/addnewurl")
+@router_urls.post("/api/addNewUrl")
 def add_new_url_controller(body:ADD_URLS_TYPE)  : 
     return add_new_url(body)
     
