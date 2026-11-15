@@ -42,7 +42,7 @@ def add_new_url(body:ADD_URLS_TYPE):
             return insert_result
         
    except UniqueViolation as err: 
-        raise HTTPException(500, detail = [ "record già presente", "F0002"])
+        raise HTTPException(409, detail = [ "record già presente", "F0002"])
    except Error as err: 
        raise HTTPException(500, detail = ["Errore durante l'update", "F0001"])
        
