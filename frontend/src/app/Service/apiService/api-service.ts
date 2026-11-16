@@ -21,9 +21,9 @@ export class ApiService {
           return UrlMapper.dtoToUrl(singleUrl);
         });
       }),
-         catchError((err:HttpErrorResponse, cat) => {
-        alert(err.error.detail[0]);
-        return throwError(()=> new Error(err.error.detail[1]));
+      catchError((err: HttpErrorResponse, cat) => {
+        alert(err.error.detail[0] || err.error);
+        return throwError(() => new Error(err.error.detail[1] || err.error));
       }),
     );
   }
@@ -33,23 +33,24 @@ export class ApiService {
       map((url: urlsDTO): urls => {
         return UrlMapper.dtoToUrl(url);
       }),
-        catchError((err:HttpErrorResponse, cat) => {
-        alert(err.error.detail[0]);
-        return throwError(()=> new Error(err.error.detail[1]));
+      catchError((err: HttpErrorResponse, cat) => {
+        alert(err.error.detail[0] || err.error);
+        return throwError(() => new Error(err.error.detail[1] || err.error));
       }),
     );
   }
 
   addNewUrl(shortUrl: string, originalUrl: string) {
-    return this.http.post<rawRes>(this.URL_ARCHIVE.addUrl, {
-      short_url: shortUrl,
-      original_url: originalUrl,
-    }).pipe(
-      catchError((err:HttpErrorResponse, cat) => {
-        alert(err.error.detail[0]);
-        return throwError(()=> new Error(err.error.detail[1]));
-      }),
-    );
-
+    return this.http
+      .post<rawRes>(this.URL_ARCHIVE.addUrl, {
+        short_url: shortUrl,
+        original_url: originalUrl,
+      })
+      .pipe(
+        catchError((err: HttpErrorResponse, cat) => {
+          alert(err.error.detail[0] || err.error);
+          return throwError(() => new Error(err.error.detail[1] || err.error));
+        }),
+      );
   }
 }
