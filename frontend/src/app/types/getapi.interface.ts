@@ -1,4 +1,4 @@
-interface urls {
+export interface urls {
   id: number;
   code: string;
   url: string;
@@ -6,7 +6,7 @@ interface urls {
   clicks: number;
 }
 
-interface urlsDTO  {
+export interface urlsDTO  {
     id: number
     short_url: string
     original_url: string
@@ -14,6 +14,6 @@ interface urlsDTO  {
     creation_date: string
   }
 
-interface rawRes{
+export interface rawRes{
   new_insert:number
 }

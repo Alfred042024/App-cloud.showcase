@@ -1,6 +1,8 @@
 import { HttpClient, httpResource } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { rawRes, urls, urlsDTO } from '../../types/getapi.interface';
+import { UrlMapper } from '../../mapper/urlmapper/urlMapper.class';
 
 @Service()
 export class ApiService {
