@@ -1,17 +1,16 @@
-import { JsonPipe } from '@angular/common';
-import { AfterContentInit, Component, inject, OnInit, signal } from '@angular/core';
+import {  Component, inject, signal } from '@angular/core';
 import { ApiService } from '../../Service/apiService/api-service';
 import { lastValueFrom } from 'rxjs';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { urls } from '../../types/getapi.interface';
 
 @Component({
-  imports: [JsonPipe, ReactiveFormsModule],
+  imports: [ ReactiveFormsModule],
   selector: 'app-api-calling',
   styleUrl: './api-calling.scss',
   templateUrl: './api-calling.html',
 })
-export class ApiCalling  {
+export class ApiCalling {
   callapiSrv = inject(ApiService);
 
   resultapi = signal([] as urls[]);
@@ -26,8 +25,10 @@ export class ApiCalling  {
   }
 
   getall() {
-    this.callapiSrv.getAll().subscribe((res:urls[]) => {
-      this.resultapi.update(()=>{return res});
+    this.callapiSrv.getAll().subscribe((res: urls[]) => {
+      this.resultapi.update(() => {
+        return res;
+      });
     });
   }
 
@@ -38,7 +39,11 @@ export class ApiCalling  {
   async addNewUrl() {
     const values = this.addNewForm.getRawValue();
 
-    await lastValueFrom(this.callapiSrv.addNewUrl(values.short || '', values.original || ''));
-    this.getall()
+    try {
+      await lastValueFrom(this.callapiSrv.addNewUrl(values.short || '', values.original || ''));
+      this.getall();
+    } catch (e) {
+      console.log(e);
+    }
   }
 }
