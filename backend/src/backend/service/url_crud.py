@@ -3,7 +3,6 @@ from backend.models.urls_models import ADD_URLS_TYPE
 from psycopg.rows import dict_row
 from psycopg.errors import Error , UniqueViolation
 from fastapi.exceptions import HTTPException
-from fastapi.responses import Response
 
 def get_url_by_id(id: int ): 
     with DB_POOL.connection() as connection: 
@@ -64,6 +63,6 @@ def delete_url_service(id):
             else: 
                 return None
     except Error as err: 
-        raise HTTPException(500, detail = ["Errore durantel l'operazione", "F0006"])
+        raise HTTPException(500, detail = ["Errore durante l'operazione", "F0006"])
     
             

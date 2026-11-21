@@ -19,10 +19,10 @@ def apiServiceSimpleGET():
     return get_url()
 
 @router_urls.get("/getInitialApi/{id}")
-def controller_get_url_by_id(id): 
+def controller_get_url_by_id(id:int): 
     return get_url_by_id(id)
 
-@router_urls.post("/addNewUrl")
+@router_urls.post("/addNewUrl", status_code=201)
 def add_new_url_controller(body:ADD_URLS_TYPE)  : 
     return add_new_url(body)
 
