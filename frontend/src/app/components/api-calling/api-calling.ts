@@ -1,11 +1,11 @@
-import {  Component, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ApiService } from '../../Service/apiService/api-service';
 import { lastValueFrom } from 'rxjs';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { urls } from '../../types/getapi.interface';
 
 @Component({
-  imports: [ ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   selector: 'app-api-calling',
   styleUrl: './api-calling.scss',
   templateUrl: './api-calling.html',
@@ -33,9 +33,14 @@ export class ApiCalling {
   }
 
   async deleteUrl(id: number) {
-await lastValueFrom(this.callapiSrv.deleteUrl(id))
-    this.getall()
-}
+    try{
+      await lastValueFrom(this.callapiSrv.deleteUrl(id));
+      this.getall();
+    }
+    catch(e){
+      console.error(e)
+    }
+  }
 
   async addNewUrl() {
     const values = this.addNewForm.getRawValue();
