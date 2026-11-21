@@ -12,6 +12,7 @@ export class ApiService {
     getallurls: '/api/getInitialApi',
     geturlsbyid: '/api/getInitialApi/',
     addUrl: '/api/addNewUrl',
+    deleteUrl:  '/api/deleteUrl/'
   };
 
   getAll(): Observable<urls[]> {
@@ -46,6 +47,17 @@ export class ApiService {
         short_url: shortUrl,
         original_url: originalUrl,
       })
+      .pipe(
+        catchError((err: HttpErrorResponse, cat) => {
+          alert(err.error.detail[0] || err.error);
+          return throwError(() => new Error(err.error.detail[1] || err.error));
+        }),
+      );
+  }
+
+  deleteUrl(id:number){
+    return this.http
+      .delete<rawRes>(this.URL_ARCHIVE.deleteUrl + id )
       .pipe(
         catchError((err: HttpErrorResponse, cat) => {
           alert(err.error.detail[0] || err.error);

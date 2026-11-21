@@ -32,9 +32,10 @@ export class ApiCalling {
     });
   }
 
-  detailsUrl(id: number) {
-    console.info(['il mio id preferito cliccato', id]);
-  }
+  async deleteUrl(id: number) {
+await lastValueFrom(this.callapiSrv.deleteUrl(id))
+    this.getall()
+}
 
   async addNewUrl() {
     const values = this.addNewForm.getRawValue();

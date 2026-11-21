@@ -41,8 +41,8 @@
             <h4 class="card-title">{{ item.code }}</h4>
             <p class="card-subtitle ">Url: {{ item.url }}</p>
             <p class="card-subtitle">Click: {{ item.clicks }}</p>
-            <button (click)="detailsUrl(item.id)" class="btn btn-primary w-100">
-              Dettagli per l'url
+            <button (click)="deleteUrl(item.id)" class="btn btn-danger w-100">
+              Elimina l'url
             </button>
           </div>
         </div>
